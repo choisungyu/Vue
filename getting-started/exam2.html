@@ -10,23 +10,28 @@
 
 <body>
   <div id="app">
-    <div>{{word}}</div>
-    <form v-on:submit="onSubmitForm">
-      <input type="text" ref="answer" v-model="value">
-      <button type="submit">입력</button>
-    </form>
-    <div>{{result}}</div>
+    <word-replay />
+    <word-replay />
+    <word-replay />
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
-    // var options = 
-    var vm = new Vue({
-      el: '#app',
-      data: {
-        word: '최성규',
-        value: '',
-        result: '',
+    Vue.component('word-replay', {
+      template: `
+          <div>{{word}}</div>
+        <form v-on:submit="onSubmitForm">
+          <input type="text" ref="answer" v-model="value">
+          <button type="submit">입력</button>
+        </form>
+        <div>{{result}}</div>
+      `,
+      data() {
+        return {
+          word: '최성규',
+          value: '',
+          result: '',
+        }
+
       },
       methods: {
         onSubmitForm(e) {
@@ -35,14 +40,23 @@
             this.result = '아아';
             // this.result = '';
             this.word = this.value;
-            this.value ='';
+            this.value = '';
             this.$refs.answer.focus();
           } else {
             this.result = '노노';
-            this.value ='';
+            this.value = '';
+
           }
         }
       },
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // var options = 
+    var vm = new Vue({
+      el: '#app',
+
     });
   </script>
 </body>
