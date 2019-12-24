@@ -10,24 +10,29 @@
 
 <body>
   <div id="app">
-    <word-replay />
-    <word-replay />
-    <word-replay />
+    <word-replay start-word="최성규"></word-replay>
+    <word-replay start-word="사람"></word-replay>
+    <word-replay start-word="인간"></word-replay>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
   <script>
-    Vue.component('word-replay', {
+    Vue.component('wordReplay', {
       template: `
-          <div>{{word}}</div>
-        <form v-on:submit="onSubmitForm">
-          <input type="text" ref="answer" v-model="value">
-          <button type="submit">입력</button>
-        </form>
-        <div>{{result}}</div>
+      <div>
+      <div>{{word}}</div>
+    <form v-on:submit="onSubmitForm">
+      <input type="text" ref="answer" v-model="value">
+      <button type="submit">입력</button>
+    </form>
+    <div>{{result}}</div>
+  </div>
       `,
+      props: ['startWord'],
+
       data() {
         return {
-          word: '최성규',
+          word: this.startWord,
           value: '',
           result: '',
         }
@@ -49,9 +54,8 @@
           }
         }
       },
-    })
+    });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
     // var options = 
     var vm = new Vue({
