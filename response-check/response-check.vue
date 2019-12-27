@@ -2,7 +2,7 @@
   <div>
     <div id="screen" :class="state" @click="onClickState">{{message}}</div>
     <div>
-      <div>평균시간 : {{result.reduce((a,c) => a+c,0) / result.length || 0}}ms</div>
+      <div>평균시간 : {{average}}ms</div>
       <button @click="onReset">리셋버튼</button>
     </div>
   </div>
@@ -29,6 +29,12 @@ export default {
   methods: {
     onReset() {
       this.result = [];
+    },
+
+    computed: {
+      average() {
+        return this.result.reduce((a,c) => a+c,0) / this.result.length || 0;
+      },
     },
 
     onClickState() {
