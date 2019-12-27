@@ -17,51 +17,43 @@ let timeOut = null;
 export default {
   data() {
     return {
-      result:[],
-      state: 'waiting',
-      message:'클릭해서 시작',
-    
-
-
-      
+      result: [],
+      state: "waiting",
+      message: "클릭해서 시작"
     };
   },
+
+  computed: {
+    average() {
+      return this.result.reduce((a, c) => a + c, 0) / this.result.length || 0;
+    }
+  },
+
   methods: {
     onReset() {
       this.result = [];
     },
 
-    computed: {
-      average() {
-        return this.result.reduce((a,c) => a+c,0) / this.result.length || 0;
-      },
-    },
-
     onClickState() {
-      if (this.state === 'waiting') {
-        this.state = 'ready';
-        this.message ='초록색이 되면 클릭';
+      if (this.state === "waiting") {
+        this.state = "ready";
+        this.message = "초록색이 되면 클릭";
         timeOut = setTimeout(() => {
-          this.state ='now';
-          this.message='지금 클릭!';
+          this.state = "now";
+          this.message = "지금 클릭!";
           startTime = new Date();
-
-        }, Math.floor(Math.random() * 1000) +2000);
-
-      } else if (this.state === 'ready') {
+        }, Math.floor(Math.random() * 1000) + 2000);
+      } else if (this.state === "ready") {
         clearTimeout(timeout);
-        this.state = 'waiting';
-        this.message ='너무 성급';
-        
-      } else if (this.state === 'now') {
+        this.state = "waiting";
+        this.message = "너무 성급";
+      } else if (this.state === "now") {
         endTime = new Date();
-        this.state = 'waiting';
-        this.message = '클릭해서 시작';
+        this.state = "waiting";
+        this.message = "클릭해서 시작";
         this.result.push(endTime - startTime);
-        
       }
-    },
-    
+    }
   }
 };
 </script>
@@ -78,7 +70,7 @@ export default {
 }
 #screen.ready {
   background-color: red;
-  color:white;
+  color: white;
 }
 #screen.now {
   background-color: greenyellow;
