@@ -2,7 +2,7 @@
   <div>
     <div id="screen" :class="state" @click="onClickState">{{message}}</div>
     <div>
-      <div>평균시간 : {{}}</div>
+      <div>평균시간 : {{result.reduce((a,c) => a+c,0) / result.length || 0}}ms</div>
       <button @click="onReset">리셋버튼</button>
     </div>
   </div>
@@ -11,10 +11,13 @@
 
 <script>
 // import ~from 과 같다
+let startTime = 0;
+let endTime = 0;
+let timeOut = null;
 export default {
   data() {
     return {
-      reset:'',
+      result:[],
       state: 'waiting',
       message:'클릭해서 시작',
     
@@ -25,18 +28,30 @@ export default {
   },
   methods: {
     onReset() {
-
+      this.result = [];
     },
 
     onClickState() {
       if (this.state === 'waiting') {
         this.state = 'ready';
+        this.message ='초록색이 되면 클릭';
+        timeOut = setTimeout(() => {
+          this.state ='now';
+          this.message='지금 클릭!';
+          startTime = new Date();
+
+        }, Math.floor(Math.random() * 1000) +2000);
 
       } else if (this.state === 'ready') {
-        this.state = 'now';
+        clearTimeout(timeout);
+        this.state = 'waiting';
+        this.message ='너무 성급';
         
       } else if (this.state === 'now') {
+        endTime = new Date();
         this.state = 'waiting';
+        this.message = '클릭해서 시작';
+        this.result.push(endTime - startTime);
         
       }
     },
