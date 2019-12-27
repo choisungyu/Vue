@@ -1,3 +1,5 @@
 import Vue from 'vue';
 
-new Vue().$mount('#root');
+import NumberBaseball from './number-baseball';
+
+new Vue(NumberBaseball).$mount('#root');
