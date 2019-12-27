@@ -1,10 +1,11 @@
 <template>
   <div>
     <div id="screen" :class="state" @click="onClickState">{{message}}</div>
-    <div>
+    <!-- if(result.length > 0) ? display sub div: none -->
+    <template v-if="result.length"> 
       <div>평균시간 : {{average}}ms</div>
       <button @click="onReset">리셋버튼</button>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -44,9 +45,9 @@ export default {
           startTime = new Date();
         }, Math.floor(Math.random() * 1000) + 2000);
       } else if (this.state === "ready") {
-        clearTimeout(timeout);
+        clearTimeout(timeOut);
         this.state = "waiting";
-        this.message = "너무 성급";
+        this.message = "너무 성급11";
       } else if (this.state === "now") {
         endTime = new Date();
         this.state = "waiting";
@@ -54,7 +55,7 @@ export default {
         this.result.push(endTime - startTime);
       }
     }
-  }
+  },
 };
 </script>
 
