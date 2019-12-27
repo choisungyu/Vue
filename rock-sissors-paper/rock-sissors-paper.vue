@@ -29,7 +29,7 @@ export default {
     };
   },
 
-  // 계산하는 로직
+  // 계산하는 로직, 곁따리들 => chaching 처리
   computed: {
     computedStyleObject() {
       return {
