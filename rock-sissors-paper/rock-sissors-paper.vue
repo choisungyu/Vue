@@ -20,10 +20,11 @@ const rspCords = {
   paper: "-284px"
 };
 
+let interval = null;
 export default {
   data() {
     return {
-      imgCord: rspCords.rock,
+      imgCord: rspCords.sissros,
       result: "",
       score: 0
     };
@@ -33,14 +34,40 @@ export default {
   computed: {
     computedStyleObject() {
       return {
-        background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${this.imageCord} 0`
+        background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${this.imgCord} 0`
       };
     }
   },
 
   methods: {
     onClickButton(choice) {}
-  }
+  },
+
+  beforeUpdate() {
+    console.log('beforeupdate')
+  },
+
+  updated() {
+    console.log('updated');
+    
+  },
+  mounted() {
+    interval = setInterval(() => {
+      if (this.imgCord === rspCords.rock) {
+        this.imgCord = rspCords.sissros;
+      } else if (this.imgCord === rspCords.sissros) {
+        this.imgCord = rspCords.paper;
+      } else if (this.imgCord === rspCords.paper) {
+        this.imgCord = rspCords.rock;
+      }
+    }, 100);
+  },
+
+  beforeDestroy() {
+    clearInterval(interval);
+  },
+
+  
 };
 </script>
 
